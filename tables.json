@@ -1,0 +1,63 @@
+{
+  "all_days": [
+    "CREATE TABLE all_days(day DATE PRIMARY KEY NOT NULL);",
+    "ALL_DAYS",
+    "SELECT FECHA FROM ALL_DAYS",
+    "INSERT "
+  ],
+  "dates_by_note": [
+    "CREATE TABLE dates_by_note(zest_id VARCHAR (10) PRIMARY KEY, obs_dates VARCHAR (500) NOT NULL, pay_dates VARCHAR (500));",
+    "FECHAS",
+    "SELECT ZestID, Fecha, fecha_pago FROM FECHAS"
+  ],
+  "positions_zed": [
+    "CREATE TABLE positions_zed(date DATE NOT NULL, zest_id VARCHAR (20), security_id VARCHAR (20), nominal FLOAT, price FLOAT, price_as_of_date DATE, timezone VARCHAR (10), mkt_value FLOAT, last_act_date DATE, accrued_interest FLOAT, PRIMARY KEY (zest_id, date));",
+    "POSITIONS",
+    "SELECT FECHA, ZestID, SecurityID, Quantity, Price, [Price as of date], Timezone, [Market Value], [Last Activity], [Accrued Interest] FROM POSITIONS"
+  ],
+  "positions_zrd": [
+    "CREATE TABLE positions_zrd(date DATE NOT NULL, zest_id VARCHAR (20), security_id VARCHAR (20), nominal FLOAT, price FLOAT, price_as_of_date DATE, timezone VARCHAR (10), mkt_value FLOAT, last_act_date DATE, accrued_interest FLOAT, PRIMARY KEY(zest_id, date));",
+    "POSITIONS_ZRD",
+    "SELECT FECHA, ZestID, SecurityID, Quantity, Price, [Price as of date], Timezone, [Market Value], [Last Activity], [Accrued Interest] FROM POSITIONS_ZRD"
+  ],
+  "positions_zblx": [
+    "CREATE TABLE positions_zblx(date DATE NOT NULL, zest_id VARCHAR (20), security_id VARCHAR (20), nominal FLOAT, price FLOAT, price_as_of_date DATE, timezone VARCHAR (10), mkt_value FLOAT, last_act_date DATE, accrued_interest FLOAT, PRIMARY KEY(zest_id, date));",
+    "POSITIONS_ZBLX",
+    "SELECT FECHA, ZestID, SecurityID, Quantity, Price, [Price as of date], Timezone, [Market Value], [Last Activity], [Accrued Interest] FROM POSITIONS_ZBLX"
+  ],
+  "hist_stock_prices": [
+    "CREATE TABLE hist_stock_prices(date DATE NOT NULL, ticker VARCHAR (10), price FLOAT, PRIMARY KEY(ticker, date));",
+    "PRECIOS_HISTORICO",
+    "SELECT Fecha, Ticker, Precio FROM PRECIOS_HISTORICO"
+  ],
+  "hist_note_prices": [
+    "CREATE TABLE hist_note_prices(date DATE NOT NULL, zest_id VARCHAR (10), price FLOAT, accum_coups INTEGER, PRIMARY KEY(zest_id, date));",
+    "PRECIOS_NOTAS",
+    "SELECT Fecha, ZestID, Precio, Cupones FROM PRECIOS_NOTAS"
+  ],
+  "underlying_assets_by_note": [
+    "CREATE TABLE underlying_assets_by_note(zest_id VARCHAR (10), underlying_asset VARCHAR (10), strike FLOAT, start_date DATE NOT NULL, end_date DATE, PRIMARY KEY(zest_id, underlying_asset, start_date));",
+    "REL_NOTASUBYAC",
+    "SELECT ZestID, Subyacente, PrecioRef, FechaIngreso, FechaSalida FROM REL_NOTASUBYAC"
+  ],
+  "notes_autocall": [
+    "CREATE TABLE notes_autocall(zest_id VARCHAR (10) PRIMARY KEY, gross_coup FLOAT, net_coup FLOAT, strike_date DATE, issue_date DATE, autocallable_since DATE, final_value_date DATE, maturity_date DATE, broker VARCHAR (10), counterparty VARCHAR (50), coup_barrier FLOAT, cap_barrier FLOAT, freq VARCHAR (20), coup_history VARCHAR (50), autocall_date DATE);",
+    "T_AUTOCALL",
+    "SELECT ZestID, CuponBruto, CuponNeto, StrikeDate, IssueDate, FirstAutoCall, FinalValueDate, MaturityDate, Broker, Contraparte, Kcupon, Kcapital, Frecuencia, Cupones, FechaAutocall FROM T_AUTOCALL"
+  ],
+  "notes_cln": [
+    "CREATE TABLE notes_cln(zest_id VARCHAR (10) PRIMARY KEY, gross_coup FLOAT, net_coup FLOAT, trade_date DATE, maturity_date DATE, int_commencement_date DATE, credit_obs_date DATE, broker VARCHAR (10), counterparty VARCHAR (20), defaults_covered INTEGER, credit_event_penalty FLOAT, freq VARCHAR (20));",
+    "T_CLN",
+    "SELECT ZestID, CuponBruto, CuponNeto, TradeDate, MaturityDate, InterestCommencementDate, CreditObservationDate, Broker, Contraparte, NumeroDeProtecciones, PerdidaPorEventoCrediticio, Frecuencia FROM T_CLN"
+  ],
+  "index_notes": [
+    "CREATE TABLE index_notes(zest_id VARCHAR (20) PRIMARY KEY, isin VARCHAR (20), usip VARCHAR (20), security_id VARCHAR (20), type VARCHAR (10));",
+    "T_DIRECTORIO",
+    "SELECT ZestID, ISIN, USIP, SecurityID, Tipo FROM T_DIRECTORIO"
+  ],
+  "index_underlying_assets": [
+    "CREATE TABLE index_underlying_assets(ticker VARCHAR (20) PRIMARY KEY, description VARCHAR (50), type VARCHAR (20), broad_asset_class VARCHAR (20), sub_asset_class VARCHAR (10), currency VARCHAR (10), isin VARCHAR (20), se_code VARCHAR (10), region VARCHAR (20), country VARCHAR (20), sector VARCHAR (50), industry VARCHAR (50));",
+    "T_SUBYACENTE",
+    "SELECT Ticker, Descripcion, Tipo, [Broad Asset Class], [Sub Asset Class], Moneda, ISIN, [Codigo Bolsa], Region, Pais, Sector, Industria FROM T_SUBYACENTE"
+  ]
+}
